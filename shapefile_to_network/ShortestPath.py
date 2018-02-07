@@ -4,18 +4,38 @@ from haversine import haversine
 from MultiDiGraphConvertor import convert_MultiDi_to_Simple
 from BufferedGraph import *
 
-def assignTuple(G, coord, buffer):
+'''
+    @input:     The MultiDiGraph, coordinate, buffer size
+    @output:    Returns list of nodes in that subgraph
+
+    The function create a buffer around the coordinate with given buffer_size and return the list of nodes lies in the
+    subgraph network created around the coordinate
+'''
+
+
+def assign_tuple(g, coord, buffer_size):
     geometry = Point(coord[1], coord[0])
-    new_G = combine_network_buffer(G, geometry, buffer)
-    print new_G.nodes
-    return list(new_G.nodes)
+    new_g = combine_network_buffer(g, geometry, buffer_size)
+    print new_g.nodes
+    return list(new_g.nodes)
 
-def find_shortest_paths(G, start_tuple, end_tuple, graph_buffer, point_buffer):
+
+'''
+    @input:     The MultiDiGraph, start and end coordinates, buffer size of graph and point
+    @output:    Returns all the different path from start to end coordinates and new graph of given buffer size
+
+    The function get list of the start and end coordinate which lies in the subgraph created around that coordinate
+    with given buffer. Iterate over the list of coordinates and check if there is path exist from start to end, if it
+    does then calculate the shortest path from those coordinates and save it into dictionary along with the distance.
+'''
+
+
+def find_shortest_paths(g, start_tuple, end_tuple, graph_buffer, point_buffer):
     geometry = Point(start_tuple[1], start_tuple[0])
-    start_tuples = assignTuple(G, start_tuple, point_buffer)
-    end_tuples = assignTuple(G, end_tuple, point_buffer)
+    start_tuples = assign_tuple(g, start_tuple, point_buffer)
+    end_tuples = assign_tuple(g, end_tuple, point_buffer)
 
-    buffered_graph = combine_network_buffer(G, geometry, graph_buffer)
+    buffered_graph = combine_network_buffer(g, geometry, graph_buffer)
     nodes = list(buffered_graph.nodes)
 
     path_dict = {}
@@ -28,14 +48,24 @@ def find_shortest_paths(G, start_tuple, end_tuple, graph_buffer, point_buffer):
                         shortest_distance = nx.dijkstra_path_length(buffered_graph, start_tuple, end_tuple,
                                                                     weight='weight')
                         shortest_path = nx.shortest_path(buffered_graph, start_tuple, end_tuple, weight='weight')
-                        print 'Shortest Path: ', shortest_distance
                         path_dict[shortest_distance] = shortest_path
 
     return path_dict, buffered_graph
 
-def alphaTimesShortestPath(G, alpha, graph_buffer, point_buffer, start_tuple, end_tuple, break_point):
-    shortest_paths, buffered_graph = find_shortest_paths(G, start_tuple, end_tuple, graph_buffer, point_buffer)
-    totalPaths = 0
+''''
+    @input:     The MultiDiGraph, alpha, buffer size of the graph and the point, start & end coordinates and
+                breakpoint upper counter to stop loop
+    @output:    Returns the number of different paths
+
+    The function return the list of total different paths which is alpha times the shortest path. It get the list of
+    all the path from start to end coordinate and check if the distance of that particular path is alpha times the
+    shortest path. If it is less than or equal to it then increment the counter
+'''
+
+
+def alpha_times_shortestpath(g, alpha, graph_buffer, point_buffer, start_tuple, end_tuple, break_point):
+    shortest_paths, buffered_graph = find_shortest_paths(g, start_tuple, end_tuple, graph_buffer, point_buffer)
+    total_paths = 0
 
     if len(shortest_paths) >= 1:
         shortest_dis = min(shortest_paths.keys())
@@ -51,7 +81,7 @@ def alphaTimesShortestPath(G, alpha, graph_buffer, point_buffer, start_tuple, en
         nodes_in_path = []
 
         for path in all_paths:
-            if totalPaths >= break_point:
+            if total_paths >= break_point:
                 break
 
             total_distance = 0
@@ -63,11 +93,11 @@ def alphaTimesShortestPath(G, alpha, graph_buffer, point_buffer, start_tuple, en
                         break
 
             if flag or (total_distance <= (alpha * shortest_dis)):
-                totalPaths += 1
+                total_paths += 1
                 path_list.append(total_distance)
                 nodes_in_path.append(len(path))
 
-            if flag == False:
+            if not flag:
                 break
 
-    return totalPaths
+    return total_paths
