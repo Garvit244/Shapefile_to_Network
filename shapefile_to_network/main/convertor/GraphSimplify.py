@@ -21,7 +21,6 @@ class GraphSimplify:
         Return true if its the intermediate node of false if its not
     '''
 
-
     def is_intermediate_node(self, node):
         neighbours = set(list(self.G.predecessors(node)) + list(self.G.successors(node)))
         d = self.G.degree(node)
@@ -45,7 +44,6 @@ class GraphSimplify:
 
     '''
 
-
     def find_path(self, start_node, endnode_list, path):
         for succesor in self.G.successors(start_node):
             if succesor not in path:
@@ -59,7 +57,6 @@ class GraphSimplify:
             path.append(path[0])
         return path
 
-
     '''
         @input:     The MultiDigraph for simplifying and cleaning
         @output:    Returns cleaned and simplified MultiDigraph
@@ -67,7 +64,6 @@ class GraphSimplify:
         This function removed all the nodes which are of degree one and intermediate nodes. While removing the intermediate
         nodes it preserve the weight(distance) between edges by adding it to the new edges while removing intermediate node.
     '''
-
 
     def simplify_graph(self):
         non_intermediate_node = set()
@@ -99,4 +95,3 @@ class GraphSimplify:
             self.G.add_edge(edge['start'], edge['end'], weight=edge['distance'])
 
         return self.G
-

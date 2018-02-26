@@ -6,13 +6,13 @@ import networkx as nx
     @Output:    Simple Graph
 '''
 
-class MultiDiToSimple:
 
+class MultiDiToSimple:
     def __init__(self, G):
         self.G = G
 
     def convert_MultiDi_to_Simple(self):
-        new_G = (self.G).to_undirected()
+        new_G = self.G.to_undirected()
 
         new_simple_graph = nx.Graph()
         for uv in new_G.edges:
@@ -24,7 +24,7 @@ class MultiDiToSimple:
 
             new_start = (u_lat, u_lon)
             new_end = (v_lat, v_lon)
-            weight = new_G.get_edge_data(uv[0],uv[1])[0]['weight']
+            weight = new_G.get_edge_data(uv[0], uv[1])[0]['weight']
             if new_simple_graph.has_edge(new_start, new_end):
                 continue
             else:
