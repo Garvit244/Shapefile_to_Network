@@ -1,5 +1,4 @@
 import geopandas as gpd
-from GraphSimplify import *
 
 '''
     @input:     point geometry and the crs geometry crs

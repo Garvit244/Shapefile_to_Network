@@ -1,8 +1,9 @@
-from shapely.geometry import Point
 import networkx as nx
 from haversine import haversine
-from MultiDiGraphConvertor import convert_MultiDi_to_Simple
+from shapely.geometry import Point
+
 from BufferedGraph import *
+from shapefile_to_network.main.convertor import MultiDiToSimple
 
 '''
     @input:     The MultiDiGraph, coordinate, buffer size
@@ -73,7 +74,8 @@ def alpha_times_shortestpath(g, alpha, graph_buffer, point_buffer, start_tuple, 
         new_start_coord = shortest_path[0]
         new_end_coord = shortest_path[len(shortest_path)-1]
 
-        all_paths = nx.shortest_simple_paths(convert_MultiDi_to_Simple(buffered_graph), source=new_start_coord,
+        new_buffered_graph = MultiDiToSimple(buffered_graph).convert_MultiDi_to_Simple()
+        all_paths = nx.shortest_simple_paths(new_buffered_graph, source=new_start_coord,
                                              target=new_end_coord, weight='weight')
 
         flag = True

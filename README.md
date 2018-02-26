@@ -6,13 +6,13 @@ This python module allow you to get information of number of delta shortest paht
 
 # Files Documentation
 ###### Core Scripts
-*GraphConvertor.py* - This module will take the input line shapefile and the path of output directory
-*ShortestPath.py* - This module will calculate the number of *alpha* times shortest path from origin to destination in the graph
+*main/convertor/GraphConvertor.py* - This module will take the input line shapefile and the path of output directory
+*main/shortest_paths/ShortestPath.py* - This module will calculate the number of *alpha* times shortest path from origin to destination in the graph
 
 ###### Internally Called Scripts
-*BufferedGraph.py* - This module create the square (*buffer*) around the point geometry specified by user.
-*GraphSimplify.py* - This module will clean and remove all the unusable edges from the graph
-*MultiDiGraphConvertor.py* - This module will convert the MultiDiGraph to SimpleGraph.
+*main/shortest_paths/BufferedGraph.py* - This module create the square (*buffer*) around the point geometry specified by user.
+*main/convertor/GraphSimplify.py* - This module will clean and remove all the unusable edges from the graph
+*main/convertor/MultiDiGraphConvertor.py* - This module will convert the MultiDiGraph to SimpleGraph.
 
 # How to use
 > Run *setup.py* to install all the required packages
