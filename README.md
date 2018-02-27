@@ -1,8 +1,8 @@
 # Shapefile To Network
-Construct network from shapefile and find number of shortest paths from origin to destination.
+Construct a network from shapefile and do analytics such as finding number of shortest paths from origin to destination, calculating centrality, degree of the nodes in network.
 
 ## Overview
-This python module allow you to get information of number of delta shortest pahts from origin to destination where delta is some constant specified by the user. You can also do some analysis over the network like finding degree, centrality of the nodes in graph.
+This python module allow you to get number of alpha times shortest paths from origin to destination where alpha is some constant specified by the user. You can also do some analysis over the network like finding degree, centrality of the nodes in graph.
 
 ## Installation
 
@@ -24,18 +24,18 @@ This python module allow you to get information of number of delta shortest paht
 ## Documentation
 #### Core Scripts 
 
-* _GraphConvertor.py_ - This module will take the input line shapefile and the path of output directory 
-* _ShortestPath.py_ -   This module will calculate the number of *alpha* times shortest path from origin to destination in the graph
+* _GraphConvertor.py_  - This module will take the input line shapefile and the path of output directory 
+* _ShortestPath.py_    - This module will calculate the number of _alpha_ times shortest path from origin to destination in the graph
 
 #### Other Scripts 
 
-* _BufferedGraph.py_ - This module create the square (*buffer*) around the point geometry specified by user 
-* _GraphSimplify.py_ - This module will clean and remove all the unusable edges from the graph 
+* _BufferedGraph.py_ - This module create the square (_buffer_) of given size around the point geometry 
+* _GraphSimplify.py_ - This module will clean and remove all the redundant edges and extra/ uninformative nodes from the graph 
 * _MultiDiGraphConvertor.py_ - This module will convert the MultiDiGraph to SimpleGraph 
 
 
 ## How to use
-* Create the line shapefile of the road network (if not available already)
+* Create the line shapefile of the road network (if not available)
 
   * Using QGIS
     - Open the shapefile in QGIS which need to be converted to line shapefile
@@ -54,15 +54,15 @@ This python module allow you to get information of number of delta shortest paht
     
     graph_convertor_obj = GraphConvertor(input_file, output_dir)
     ```
-  * Call **_graph_convertor_** function to convert the input shapefile into road network and save the newly created shapefile into specifed **_output_dir_**
+  * Call **_graph_convertor_** function to convert the input shapefile into road network and save the newly created shapefile into specifed **_output_dir_** along with list of nodes and edges in _.csv_ files
   
     ```python
     network = graph_convertor_obj.graph_convertor()
     ```
   
-* Find number of shortest paths from origin to destination in new network
+* Find number of shortest paths from origin to destination in new simplified network
 
-  * Create **_ShortestPath_**  object by passing int all required parameters listed below
+  * Create **_ShortestPath_**  object by passing all required parameters listed below
   
      ```python
      g            =  network
