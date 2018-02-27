@@ -4,6 +4,15 @@ Construct a network from shapefile and do analytics such as finding number of sh
 ## Overview
 This python module allow you to get number of alpha times shortest paths from origin to destination where alpha is some constant specified by the user. You can also do some analysis over the network like finding degree, centrality of the nodes in graph.
 
+#### Original Network
+
+<br/><img src = "https://github.com/Garvit244/Shapefile_to_Network/blob/master/shapefile_to_network/Images/Original_Network.png" height="450" width ="450" alight="left"> 
+
+#### New Simplified Network
+
+<br/> <img src = "https://github.com/Garvit244/Shapefile_to_Network/blob/master/shapefile_to_network/Images/New_Network.png" height="450" width ="450"> 
+
+
 ## Installation
 
 * Install python >= 2.7 
