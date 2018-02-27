@@ -16,7 +16,7 @@ This python module allow you to get information of number of delta shortest paht
     ```
     $ brew install python
     ```
-* Run _setup.py_ for installing required packages
+* Run **_setup.py_** for installing required packages
 
   ```
   python2.7 setup.py install
@@ -46,16 +46,16 @@ This python module allow you to get information of number of delta shortest paht
     
 * Convert the created line shapefile into network using **_GraphConvertor.py_**
 
-  * Create _GraphConvertor_ object by passing the path of input shapefile and the output directory
+  * Create **_GraphConvertor_** object by passing the path of input shapefile and the output directory
     ```
     graph_convertor_obj = GraphConvertor(input_file, output_dir)
     ```
-  * Call _graph_convertor_ function to convert the input shapefile into road network and save the newly created shapefile into specifed _output_dir_
+  * Call **_graph_convertor_** function to convert the input shapefile into road network and save the newly created shapefile into specifed **_output_dir_**
     ```
     network = graph_convertor_obj.graph_convertor()
     ```
   
 * Find number of shortest paths from origin to destination in new network
 
-  * Run _alpha_times_shortestpath_ function in _ShortestPath.py_ script to calculate number of paths which are alpha times the shortest path.
+  * Run **_alpha_times_shortestpath_** function in **_ShortestPath.py_** script to calculate number of paths which are alpha times the shortest path.
     
