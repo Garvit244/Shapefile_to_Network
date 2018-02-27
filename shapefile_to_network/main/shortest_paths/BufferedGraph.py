@@ -1,5 +1,7 @@
 import geopandas as gpd
 
+from shapefile_to_network.main.convertor.GraphSimplify import GraphSimplify
+
 '''
     @input:     point geometry and the crs geometry crs
     @output:    reprojected geometry and the crd of the geometry
@@ -86,5 +88,7 @@ def combine_network_buffer(g, geometry, buffer_size):
                 external_node.append(node)
 
         buffered_g.remove_nodes_from(external_node)
-    return simplify_graph(buffered_g)
+
+    simplify_graph = GraphSimplify(buffered_g)
+    return simplify_graph.simplify_graph()
 
