@@ -62,17 +62,23 @@ This python module allow you to get information of number of delta shortest paht
   
 * Find number of shortest paths from origin to destination in new network
 
-  * Run **_alpha_times_shortestpath_** function in **_ShortestPath.py_** script to calculate number of paths which are alpha times the shortest path
+  * Create **_ShortestPath_**  object by passing int all required parameters listed below
   
      ```python
      g            =  network
      alpha        =  0.1
      graph_buffer =  100
      point_buffer =  50
-     start_tuple  =  (lat,lon)
-     end_tuple    =  (lat,lon)
      break_point  =  200         # Upper limit to save computation time
 
-     total_path   =  alpha_time_shortestpath(g, alpha, graph_buffer, point_buffer, start_tuple, end_tuple, break_point)
+     shortest_path_obj   =  ShortestPath(g, alpha, graph_buffer, point_buffer, break_point)
      ```
-    
+     
+   * Run **_alpha_times_shortestpath_** function to calculate number of paths which are alpha times the shortest path
+  
+     ```python
+     start_tuple  =  (lat,lon)
+     end_tuple    =  (lat,lon)
+
+     total_path   =  shortest_path_obj.alpha_time_shortestpath(start_tuple, end_tuple)
+     ```
