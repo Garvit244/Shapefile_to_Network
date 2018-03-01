@@ -10,7 +10,7 @@ import networkx as nx
 
 
 class Centrality:
-    def __init__(self, g, weight):
+    def __init__(self, g, weight=None):
         self.g = g
         self.weight = weight
 
