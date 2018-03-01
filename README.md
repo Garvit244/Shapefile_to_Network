@@ -91,3 +91,17 @@ This python module allow you to get number of alpha times shortest paths from or
 
      total_path   =  shortest_path_obj.alpha_time_shortestpath(start_tuple, end_tuple)
      ```
+* Find metrics like degree centrality, closeness centrality, communicability and load centrality for doing analysis over created network.
+ 
+  * Create **_Centrality_** object by passing the network and the weight attribute of the network
+   
+    ```python
+    centrality = Centrality(g, weight='distance')
+    ```
+
+  * Get all the metrics of the network by calling **_metrics_** function of centrality class
+
+    ```python
+    degree_centrality, closeness_centrality, communicability, load_centrality = centrality.metrics()
+    ```
+    
