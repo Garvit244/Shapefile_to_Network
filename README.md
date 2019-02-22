@@ -105,3 +105,5 @@ This python module allow you to get number of alpha times shortest paths from or
     degree_centrality, closeness_centrality, communicability, load_centrality = centrality.metrics()
     ```
     
+## More Info
+For reference/citing: [Journal Paper](https://arxiv.org/pdf/1902.08028.pdf).
